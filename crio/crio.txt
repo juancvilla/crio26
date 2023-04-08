@@ -1,0 +1,25 @@
+VERSION=1.26
+OS=CentOS_8
+curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/devel:/kubic:/libcontainers:/stable.repo
+curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$VERSION/$OS/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
+
+sudo yum install cri-o cri-tools
+
+rpm -qi cri-o
+
+sudo systemctl enable --now crio
+
+systemctl status crio
+
+curl -LO https://dl.k8s.io/release/v1.26.0/bin/linux/amd64/kubectl
+
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+chmod +x kubectl
+mkdir -p ~/.local/bin
+mv ./kubectl ~/.local/bin/kubectl
+
+kubectl version --client
+
+kubectl version --client --output=yaml    
+
