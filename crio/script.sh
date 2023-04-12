@@ -19,7 +19,7 @@ $ sudo firewall-cmd --permanent --add-port=10252/tcp
 $ sudo firewall-cmd --reload"
 echo "On Worker node, allow following ports,
 $ sudo firewall-cmd --permanent --add-port=10250/tcp
-$ sudo firewall-cmd --permanent --add-port=30000-32767/tcp                                                 
+$ sudo firewall-cmd --permanent --add-port=30000-32767/tcp
 $ sudo firewall-cmd --reload"
 
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
@@ -38,6 +38,7 @@ export VERSION=1.26
 sudo curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_8/devel:kubic:libcontainers:stable.repo
 sudo curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/CentOS_8/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
 cd ~/k8sInstall
+sudo yum -y localinstall conntrack-tools-1.4.4-10.el8.x86_64.rpm libnetfilter_conntrack-1.0.6-5.el8.x86_64.rpm libnetfilter_cthelper-1.0.0-15.el8.x86_64.rpm libnetfilter_cttimeout-1.0.0-11.el8.x86_64.rpm libnetfilter_queue-1.0.4-3.el8.x86_64.rpm
 sudo yum -y localinstall socat-1.7.4.1-1.el8.x86_64.rpm
 sudo dnf -y install cri-o
 sudo systemctl enable crio
@@ -52,8 +53,8 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 exclude=kubelet kubeadm kubectl
 EOF
-sudo yum -y localinstall conntrack-tools-1.4.4-10.el8.x86_64.rpm libnetfilter_conntrack-1.0.6-5.el8.x86_64.rpm libnetfilter_cthelper-1.0.0-15.el8.x86_64.rpm libnetfilter_cttimeout-1.0.0-11.el8.x86_64.rpm libnetfilter_queue-1.0.4-3.el8.x86_64.rpm
 sudo dnf install -y kubelet-1.26.1 kubeadm-1.26.1 kubectl-1.26.1 --disableexcludes=kubernetes
+
 
 
 
