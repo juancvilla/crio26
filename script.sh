@@ -59,5 +59,7 @@ sudo dnf install -y kubelet-1.26.1 kubeadm-1.26.1 kubectl-1.26.1 --disableexclud
 sudo systemctl enable kubelet
 sudo systemctl start kubelet
 
+echo "sudo kubeadm init --pod-network-cidr=192.168.10.0/16"
+
 
 
