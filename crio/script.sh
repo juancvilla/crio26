@@ -1,3 +1,4 @@
+# Source of information: https://www.linuxtechi.com/how-to-install-kubernetes-cluster-rhel/
 sudo swapoff -a
 sudo sed -i '/swap/d' /etc/fstab
 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
